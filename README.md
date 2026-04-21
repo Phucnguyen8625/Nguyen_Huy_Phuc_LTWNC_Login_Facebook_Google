@@ -49,13 +49,27 @@ DB_USERNAME=root
 DB_PASSWORD=your_password
 ```
 
-### Bước 4: Chạy Migration và Tạo Key
-```bash
-php artisan key:generate
 php artisan migrate
 ```
 
-## 4. Cấu hình Google & Facebook OAuth
+### Bước 2: Cấu hình HTTPS (Quan trọng cho Facebook)
+Facebook yêu cầu kết nối bảo mật (HTTPS). Chúng ta sử dụng **Ngrok** để tạo tunnel:
+1. Chạy Laravel: `php artisan serve`
+2. Chạy Ngrok: `ngrok http 8000`
+3. Copy địa chỉ HTTPS từ Ngrok (VD: `https://abcd-123.ngrok-free.app`) và cập nhật vào file `.env`:
+   - `APP_URL=https://abcd-123.ngrok-free.app`
+   - `GOOGLE_REDIRECT_URI=https://abcd-123.ngrok-free.app/auth/google/callback`
+   - `FACEBOOK_REDIRECT_URI=https://abcd-123.ngrok-free.app/auth/facebook/callback`
+
+### Bước 3: Cấu hình Provider
+- **Google Cloud Console**: Thêm URI redirect của Ngrok vào mục "Authorized redirect URIs".
+- **Facebook Developers**: Thêm URI redirect của Ngrok vào mục "Valid OAuth Redirect URIs" và cập nhật "Site URL" trong phần Basic Settings.
+
+## 4. Video Demo
+- Link Video: [Điền link video của bạn tại đây]
+- Nội dung: Đăng nhập Google, Đăng nhập Facebook, Hiển thị thông tin sinh viên.
+
+## 5. Cấu hình Google & Facebook OAuth
 
 ### Google OAuth
 1. Truy cập [Google Cloud Console](https://console.cloud.google.com/).
